@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Книга {{ book.name }}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="header text-center">
+        <h1><a href="/books">Книга {{ book.name }}</a></h1>
+    </div>
+    <div class="row">
+        <div class="book col-md-12 text-center">
+            <h2>{{ book.name }}</h2>
+            <p>Автор: {{ book.author }}</p>
+            <p>Дата публикации: {{ book.pub_date }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="pagination d-flex justify-content-around col-12">
+            {% if book.get_previous_book %}
+            <a href="/books/{{ book.get_previous_book.get_pub_date_path }}/">&lt {{ book.get_previous_book.pub_date }}</a>
+            {% endif %}
+            {% if book.get_next_book %}
+            <a href="/books/{{ book.get_next_book.get_pub_date_path }}/"> {{ book.get_next_book.pub_date }} &gt</a>
+            {% endif %}
+        </div>
+    </div>
+    <a href="/books/"><h5 class="text-center pt-5">Вернуться на главную</h5></a>
+</div>
+{% endblock %}
